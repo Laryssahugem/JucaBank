@@ -1,52 +1,52 @@
 CREATE TABLE Cliente (
-    idCliente int identity,
-    nomeCliente varchar(100) NOT NULL,
-    cpf varchar(11) NOT NULL,
-    rg varchar(8) NOT NULL,
-    dataNascimento datetime NOT NULL,
-    genero varchar(1) NOT NULL,
-    celular varchar(11) NOT NULL,
-    cep varchar(8) NOT NULL, 
-    logradouro varchar(50) NOT NULL,
-    numeroEndereco varchar(5) NOT NULL,
-    cidade varchar(50) NOT NULL,
-    estado varchar(50) NOT NULL,
-    renda decimal(10,2) NOT NULL,
-    email varchar(50) NOT NULL,
-    senha varchar(6) NOT NULL,
-  constraint pk_Cliente primary key (idCliente), 
-  constraint ck_Genero check (genero in ('F', 'M', 'O'))    
+Â Â Â  idCliente int identity,
+Â Â Â  nomeCliente varchar(100) NOT NULL,
+Â Â Â  cpf varchar(11) NOT NULL,
+Â Â Â  rg varchar(8) NOT NULL,
+Â Â Â  dataNascimento datetime NOT NULL,
+Â Â Â  genero varchar(1) NOT NULL,
+Â Â Â  celular varchar(11) NOT NULL,
+Â Â Â  cep varchar(8) NOT NULL,Â 
+Â Â Â  logradouro varchar(50) NOT NULL,
+Â Â Â  numeroEndereco varchar(5) NOT NULL,
+Â Â Â  cidade varchar(50) NOT NULL,
+Â Â Â  estado varchar(50) NOT NULL,
+Â Â Â  renda decimal(10,2) NOT NULL,
+Â Â Â  email varchar(50) NOT NULL,
+Â Â Â  senha varchar(6) NOT NULL,
+Â  constraint pk_Cliente primary key (idCliente),Â 
+Â  constraint ck_Genero check (genero in ('F', 'M', 'O'))Â Â Â Â 
 )
 GO
 CREATE TABLE Conta (
-  idConta int identity,
-  idCliente integer NOT NULL,
-  saldo decimal(10,2) NOT NULL,
-  limite decimal(10,2),
-  tipoConta varchar(30) NOT NULL,
-  aberturaConta datetime NOT NULL,
-  statusConta varchar(50) NOT NULL,
-  encerramentoConta datetime,
-  constraint pk_Conta primary key (idConta),
-  constraint fk_Cliente foreign key (idCliente) references Cliente (idCliente),
-  constraint uk_Abertura_Conta unique (aberturaConta),
-  constraint ck_Status_Conta check (statusConta in ('Ativa','Inativa','Bloqueada')) 
+Â  idConta int identity,
+Â  idCliente integer NOT NULL,
+Â  saldo decimal(10,2) NOT NULL,
+Â  limite decimal(10,2),
+Â  tipoConta varchar(30) NOT NULL,
+Â  aberturaConta datetime NOT NULL,
+Â  statusConta varchar(50) NOT NULL,
+Â  encerramentoConta datetime,
+Â  constraint pk_Conta primary key (idConta),
+Â  constraint fk_Cliente foreign key (idCliente) references Cliente (idCliente),
+Â  constraint uk_Abertura_Conta unique (aberturaConta),
+Â  constraint ck_Status_Conta check (statusConta in ('Ativa','Inativa','Bloqueada'))Â 
 )
 GO
 CREATE TABLE TipoTransacao (
-  idTipoTransacao int identity,
-  nomeTransacao varchar(50) NOT NULL UNIQUE,
-  constraint pk_TipoTransação primary key (idTipoTransacao),
-  constraint uk_Nome_Transacao unique (nomeTransacao)
+Â  idTipoTransacao int identity,
+Â  nomeTransacao varchar(50) NOT NULL UNIQUE,
+Â  constraint pk_TipoTransaÃ§Ã£o primary key (idTipoTransacao),
+Â  constraint uk_Nome_Transacao unique (nomeTransacao)
 )
 GO
 CREATE TABLE Transacao (
-    idTransacao int identity,
-    idConta integer NOT NULL,
-    idContaDestino integer NOT NULL,
-    idTipoTransacao integer NOT NULL,
-    dataHora datetime NOT NULL,
-    valor numeric (10,2) NOT NULL,
+Â Â Â  idTransacao int identity,
+Â Â Â  idConta integer NOT NULL,
+Â Â Â  idContaDestino integer NOT NULL,
+Â Â Â  idTipoTransacao integer NOT NULL,
+Â Â Â  dataHora datetime NOT NULL,
+Â Â Â  valor numeric (10,2) NOT NULL,
 constraint pk_Transacao primary key (idTransacao),
 constraint fk_Conta foreign key (idConta) references Conta (idConta),
 constraint fk_Conta_Destino foreign key (idContaDestino) references Conta (idConta),
@@ -54,14 +54,15 @@ constraint fk_TipoTransacao foreign key (idTipoTransacao) references TipoTransac
 )
 GO
 CREATE TABLE Agendamento (
-    idAgendamento int identity,
-    idConta integer NOT NULL,
-    idContaDestino integer NOT NULL,
-    dataAgendamento datetime NOT NULL,
-    cancelarAgendamento varchar(8) NOT NULL,
-    valor decimal(10,2) NOT NULL,
-  constraint pk_Agendamento primary key (idAgendamento),
+Â Â Â  idAgendamento int identity,
+Â Â Â  idConta integer NOT NULL,
+Â Â Â  idContaDestino integer NOT NULL,
+Â Â Â  dataAgendamento datetime NOT NULL,
+Â Â Â  cancelarAgendamento varchar(8) NOT NULL,
+Â Â Â  valor decimal(10,2) NOT NULL,
+Â  constraint pk_Agendamento primary key (idAgendamento),
 constraint fk_Conta_Agendamento foreign key (idConta) references Conta (idConta),
 constraint fk_Conta_Destino_Agendamento foreign key (idContaDestino) references Conta (idConta),
 )
 GO
+/* lalinha*/
