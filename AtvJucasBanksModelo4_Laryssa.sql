@@ -41,11 +41,11 @@ select max (saldo) from Conta
 
 /*21.Buscar o id da conta e o saldo da conta de todas as contas ativas e que possuam menos de R$1.000,00 mostrando as de menor valor primeiro.*/
 
-select idConta, saldo from Conta where saldo<1000.00 order by saldo desc
+select idConta, saldo from Conta where saldo<1000.00 order by saldo asc
 
 /*22.Buscar todos os tipos de operações possíveis em ordem alfabética.*/
 
-
+select * from TipoTransacao order by nomeTransacao 
 
 /*23.Buscar todas as contas e respectivos saldos do JucasBank, do maior saldo para o menor.*/
 
@@ -56,17 +56,12 @@ select * from Conta order by saldo desc
 select sum (Conta.saldo) from Conta inner join Cliente on Cliente.idCliente = Conta.idCliente where Cliente.estado='São Paulo'
 
 /*25.Buscar todos os depósitos que ocorreram na conta do Donald.*/
-select * from Cliente
-select * from Conta
-select * from Transacao
-select * from TipoTransacao
 
-
+select * from Transacao where idTipoTransacao=1 and idConta=1
 
 
 /*Desafio:  Buscar o nome do cliente, o número da conta (id) e o saldo existente, mostrando as contas com maior saldo primeiro.*/
 
-
-
+select Cliente.nomeCliente, Conta.idConta, Conta.saldo from Cliente inner join Conta on Cliente.idCliente = Conta.idCliente order by saldo desc; 
 
 
