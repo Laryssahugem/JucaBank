@@ -1,20 +1,23 @@
 CREATE TABLE Cliente (
     idCliente int identity,
-    nomeCliente varchar(100) NOT NULL,
-    cpf varchar(11) NOT NULL,
-    rg varchar(8) NOT NULL,
+    nomeCliente varchar(200) NOT NULL,
+    cpf char(11) NOT NULL,
+    rg char(8) NOT NULL,
     dataNascimento datetime NOT NULL,
-    genero varchar(1) NOT NULL,
-    celular varchar(11) NOT NULL,
-    cep varchar(8) NOT NULL, 
+    genero char(1) NOT NULL,
+    celular char(11) NOT NULL,
+    cep char(8) NOT NULL, 
     logradouro varchar(50) NOT NULL,
-    numeroEndereco varchar(5) NOT NULL,
+    numeroEndereco char(5) NOT NULL,
+	complemento varchar(100),
     cidade varchar(50) NOT NULL,
     estado varchar(50) NOT NULL,
     renda decimal(10,2) NOT NULL,
     email varchar(50) NOT NULL,
     senha varchar(6) NOT NULL,
-  constraint pk_Cliente primary key (idCliente), 
+  constraint pk_Cliente primary key (idCliente),
+	constraint uk_CPF unique (cpf),
+	constraint uk_email unique (email),
   constraint ck_Genero check (genero in ('F', 'M', 'O'))    
 )
 GO
@@ -30,7 +33,7 @@ CREATE TABLE Conta (
   constraint pk_Conta primary key (idConta),
   constraint fk_Cliente foreign key (idCliente) references Cliente (idCliente),
   constraint uk_Abertura_Conta unique (aberturaConta),
-  constraint ck_Status_Conta check (statusConta in ('Ativa','Inativa','Bloqueada')) 
+  constraint ck_Status_Conta check (statusConta in ('Ativo','Inativo','Bloqueado')) 
 )
 GO
 CREATE TABLE TipoTransacao (
