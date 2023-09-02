@@ -18,6 +18,7 @@ CREATE TABLE Cliente (
   constraint pk_Cliente primary key (idCliente),
 	constraint uk_CPF unique (cpf),
 	constraint uk_email unique (email),
+	constraint uk_rg unique (rg),
   constraint ck_Genero check (genero in ('F', 'M', 'O'))    
 )
 GO
@@ -29,10 +30,11 @@ CREATE TABLE Conta (
   tipoConta varchar(30) NOT NULL,
   aberturaConta datetime NOT NULL,
   statusConta varchar(50) NOT NULL,
+  senha varchar(8) NOT NULL,
   encerramentoConta datetime,
   constraint pk_Conta primary key (idConta),
   constraint fk_Cliente foreign key (idCliente) references Cliente (idCliente),
-  constraint uk_Abertura_Conta unique (aberturaConta),
+  constraint uk_Senha unique (senha),
   constraint ck_Status_Conta check (statusConta in ('Ativo','Inativo','Bloqueado')) 
 )
 GO
@@ -69,3 +71,8 @@ constraint fk_Conta_Destino_Agendamento foreign key (idContaDestino) references 
 )
 GO
 /* lalinha*/
+drop table Agendamento
+drop table Transacao
+drop table TipoTransacao
+drop table Conta
+drop table Cliente
