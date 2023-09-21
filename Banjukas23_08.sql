@@ -16,7 +16,11 @@ as
 select * from conta
 where idCliente=@idCliente
 
+drop procedure ps_buscaContasPorIdCorrentista
+
 insert into Cliente values ('Laryssa', '83763521453', '66597632', '12/12/2003 12:45', 'F', '13965487562', '39678542', 'Rua Luiz de Camões', '25','Casa', 'Santos', 'São Paulo', 2300.00, 'lary@gmail.com', '123456');
+
+exec ps_buscaContasPorIdCorrentista 
 
 create procedure pi_Correntista
 @nomeCliente varchar(200),
@@ -52,6 +56,8 @@ insert into conta (idCliente,saldo,limite,tipoConta,aberturaConta,statusConta,se
 values (@idCliente,@saldo,@limite,@tipoConta,@aberturaConta,@statusConta,@senha)
 select @@identity as 'ultimoID'
 
+exec pi_Conta 1, 1000, null, 'Comum', '2020-08-08 09:30:00.000', 'Ativo', '34567891'
+
 /*criar Procedure Atualizaçã dos Dados do Cliente 01-09*/
 Create Procedure pu_AtualizarClientes
 @idCliente int,
@@ -79,3 +85,23 @@ cep = @cep, logradouro = @logradouro, numeroEndereco = @numeroEndereco, compleme
 exec pu_AtualizarClientes 1,'Donald', '78457692143', '66597632', '05/06/1980 12:45', 'M', '13965487562', '39678542', 'Rua Luiz ', '25', 'casa', 'Santos', 'São Paulo', 2300.00, 'donald@gmail.com', '123456'
 select * from cliente
 drop procedure pu_AtualizarClientes
+
+Create Procedure pu_AtualizarSenha
+@idCliente int,
+@senha char (6)
+as
+update Cliente
+set senha = @senha
+where idCliente = @idCliente
+
+exec pu_AtualizarSenha 1, '111111'
+
+create procedure ps_ValidarSenhaConta
+@idconta int,
+@senha char (8)
+as
+select * from Conta
+where idconta = @idconta and senha = @senha
+
+exec ps_ValidarSenhaConta 3, '12345678'
+

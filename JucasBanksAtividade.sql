@@ -34,7 +34,6 @@ CREATE TABLE Conta (
   encerramentoConta datetime,
   constraint pk_Conta primary key (idConta),
   constraint fk_Cliente foreign key (idCliente) references Cliente (idCliente),
-  constraint uk_Senha unique (senha),
   constraint ck_Status_Conta check (statusConta in ('Ativo','Inativo','Bloqueado')) 
 )
 GO
